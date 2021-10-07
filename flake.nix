@@ -17,11 +17,9 @@
     flake-utils.lib.eachDefaultSystem (system:
       let pkgs = nixpkgs.legacyPackages.${system};
       in {
-        lib = {
-          build = (pkgs.callPackage ./lib.nix {
-            npmlock2nix = pkgs.callPackage npmlock2nix { };
-            yarn2nix = pkgs.yarn2nix;
-          });
-        };
+        lib = (pkgs.callPackage ./lib.nix {
+          npmlock2nix = pkgs.callPackage npmlock2nix { };
+          yarn2nix = pkgs.yarn2nix;
+        });
       });
 }
