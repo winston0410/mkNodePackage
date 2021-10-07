@@ -2,6 +2,7 @@
 
 let
   mkNpmModule = { src }: npmlock2nix.node_modules { inherit src; };
+
   mkNpmPackage = { pname, src, version, buildInputs, buildPhase, installPhase }:
     let
       nodeModules = mkNpmModule { inherit src; };
@@ -18,6 +19,7 @@ let
         ${installPhase}
       '';
     });
+
   mkYarnModule = { src }:
     let
       yarnDrv = pkgs.runCommand "yarn2nix" { } ''
@@ -66,6 +68,7 @@ let
         fi 
       '';
     });
+
   mkYarnPackage =
     { pname, src, version, buildInputs, buildPhase, installPhase }:
     let
@@ -86,7 +89,7 @@ let
     });
 in {
   inherit mkNpmModule mkNpmPackage mkYarnModule mkYarnPackage;
-  mkNodeModule = { src }:
+  mkNodeModule = ({ src }:
     let
       handler = if (builtins.pathExists "${src}/package-lock.json") then
         mkNpmModule
@@ -95,7 +98,7 @@ in {
           mkYarnModule
         else
           (abort "Cannot understand the lock file of this project"));
-    in (handler { inherit src; });
+    in (handler { inherit src; }));
   mkNodePackage =
     ({ pname, src, version, buildInputs ? [ ], buildPhase, installPhase }:
       let
