@@ -1,6 +1,6 @@
 { pkgs, stdenv, npmlock2nix, yarn2nix, ... }:
 
-{
+let
   mkNpmModule = { src }: npmlock2nix.node_modules { inherit src; };
   mkNpmPackage = { pname, src, version, buildInputs, buildPhase, installPhase }:
     let
@@ -18,7 +18,6 @@
         ${installPhase}
       '';
     });
-
   mkYarnModule = { src }:
     let
       yarnDrv = pkgs.runCommand "yarn2nix" { } ''
@@ -85,6 +84,8 @@
         ${installPhase}
       '';
     });
+in {
+  inherit mkNpmModule mkNpmPackage mkYarnModule mkYarnPackage;
   mkNodeModule = { src }:
     let
       handler = if (builtins.pathExists "${src}/package-lock.json") then
