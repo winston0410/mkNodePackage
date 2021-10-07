@@ -76,7 +76,7 @@ let
       nmPath = "${nodeModules + /node_modules}";
     in (stdenv.mkDerivation {
       inherit pname version src;
-      buildInputs = with pkgs; [ nodejs ] ++ buildInputs;
+      buildInputs = with pkgs; [ nodejs yarn ] ++ buildInputs;
 
       buildPhase = ''
         export HOME=$(pwd)
