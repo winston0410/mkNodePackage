@@ -22,7 +22,7 @@ in {
     "${prettierPluginDir}/@prettier/plugin-pug" = let 
         version = "743f5aafa11d161537bbcd614fe5af81944a8d2f";
     in{
-      source = (inputs.mkNodeModule.lib.${system}.mkNodePackage {
+      source = (inputs.mkNodePackage.lib.${system}.mkNodePackage {
         pname = "prettier-plugin-pug";
         inherit version;
         src = pkgs.fetchFromGitHub {
