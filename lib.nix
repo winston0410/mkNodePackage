@@ -85,16 +85,27 @@
         ${installPhase}
       '';
     });
-  build = ({ pname, src, version, buildInputs ? [ ], buildPhase, installPhase }:
+  mkNodeModule = { src }:
     let
       handler = if (builtins.pathExists "${src}/package-lock.json") then
-        mkNpmPackage
+        mkNpmModule
       else
         (if (builtins.pathExists "${src}/yarn.lock") then
-          mkYarnPackage
+          mkYarnModule
         else
           (abort "Cannot understand the lock file of this project"));
-    in (handler {
-      inherit pname src version buildInputs buildPhase installPhase;
-    }));
+    in (handler { inherit src; });
+  mkNodePackage =
+    ({ pname, src, version, buildInputs ? [ ], buildPhase, installPhase }:
+      let
+        handler = if (builtins.pathExists "${src}/package-lock.json") then
+          mkNpmPackage
+        else
+          (if (builtins.pathExists "${src}/yarn.lock") then
+            mkYarnPackage
+          else
+            (abort "Cannot understand the lock file of this project"));
+      in (handler {
+        inherit pname src version buildInputs buildPhase installPhase;
+      }));
 }
