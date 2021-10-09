@@ -34,16 +34,34 @@
     "npmlock2nix": {
       "flake": false,
       "locked": {
-        "lastModified": 1631558099,
-        "narHash": "sha256-xguvgtrIQHPxpc4J6EhfBnYtQDGJpt6hK1dN7KEi8R4=",
+        "lastModified": 1633729941,
+        "narHash": "sha256-v2YPcEWI1Wz8ErivorubgLcDT06H6YzFT7uhp1ymqnE=",
         "owner": "winston0410",
         "repo": "npmlock2nix",
-        "rev": "33eb3300561d724da64a46ab8e9a05a9cfa9264b",
+        "rev": "6ade47a330b6919defb45c0eb984a64234aa8468",
         "type": "github"
       },
       "original": {
         "owner": "winston0410",
+        "ref": "issue113",
         "repo": "npmlock2nix",
+        "type": "github"
+      }
+    },
+    "pnpm2nix": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1594396611,
+        "narHash": "sha256-UXOUQ+2A89/zaxYhTHiRrRBU5exbUWrg+FoJYMcNwuI=",
+        "owner": "nix-community",
+        "repo": "pnpm2nix",
+        "rev": "f67be0925a91b92f54d99dbdead7a06920b979ac",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "ref": "master",
+        "repo": "pnpm2nix",
         "type": "github"
       }
     },
@@ -51,7 +69,8 @@
       "inputs": {
         "flake-utils": "flake-utils",
         "nixpkgs": "nixpkgs",
-        "npmlock2nix": "npmlock2nix"
+        "npmlock2nix": "npmlock2nix",
+        "pnpm2nix": "pnpm2nix"
       }
     }
   },

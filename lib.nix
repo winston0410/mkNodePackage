@@ -1,4 +1,4 @@
-{ pkgs, lib, stdenv, npmlock2nix, yarn2nix, ... }:
+{ pkgs, lib, stdenv, npmlock2nix, yarn2nix, pnpm2nix, ... }:
 
 let
   mkNpmModule = { src }: npmlock2nix.node_modules { inherit src; };
